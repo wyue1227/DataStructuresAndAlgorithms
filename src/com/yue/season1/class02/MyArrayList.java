@@ -152,6 +152,20 @@ public class MyArrayList<E> extends MyAbstractList<E> {
     }
 
     /**
+     * 将列表的容量修改为当前元素个数大小，应用程序可以使用该操作，最小化实例存储。<br>
+     * 为了避免大量连续空间的浪费，以及效率问题，仅提供手动缩容方法。
+     */
+    public void trimToSize() {
+
+        if (size < elements.length) {
+            elements =
+                    (size == 0) ?
+                            EMPTY_ELEMENT :
+                            Arrays.copyOf(elements, size);
+        }
+    }
+
+    /**
      * 判断数组是否需要扩容
      */
     private void checkGrow() {
