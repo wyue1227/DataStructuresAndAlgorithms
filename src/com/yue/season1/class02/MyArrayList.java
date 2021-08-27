@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * @author 19745
  */
-public class MyArrayList<E> implements IMyArrayList<E>{
+public class MyArrayList<E> extends MyAbstractList<E> {
 
     /**
      * 默认的初始化容量
@@ -18,19 +18,10 @@ public class MyArrayList<E> implements IMyArrayList<E>{
     private static final Object[] EMPTY_ELEMENT = {};
 
     /**
-     * 动态数组中没找到指定值
-     */
-    private static final int ELEMENT_NOT_FOUND = -1;
-
-    /**
      * 能分配数组的最大大小
      */
     private static final int MAX_ARRAY_LENGTH = Integer.MAX_VALUE - 8;
 
-    /**
-     * 元素数量
-     */
-    private int size;
 
     /**
      * 元素数量
@@ -55,7 +46,7 @@ public class MyArrayList<E> implements IMyArrayList<E>{
         } else if (initialCapacity == 0) {
             elements = EMPTY_ELEMENT;
         } else {
-            throw new IllegalArgumentException("Illegal Capacity: "+
+            throw new IllegalArgumentException("Illegal Capacity: " +
                     initialCapacity);
         }
     }
@@ -68,7 +59,7 @@ public class MyArrayList<E> implements IMyArrayList<E>{
 
     // 临时用，比对GC清理效果，case - null
     public void clear2() {
-        for (int i = 0; i < size; i ++) {
+        for (int i = 0; i < size; i++) {
             elements[i] = null;
         }
         size = 0;
@@ -80,26 +71,6 @@ public class MyArrayList<E> implements IMyArrayList<E>{
         for (int to = size, i = size = 0; i < to; i++) {
             es[i] = null;
         }
-    }
-
-    @Override
-    public int size() {
-        return size;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
-    @Override
-    public boolean contains(E element) {
-        return indexOf(element) != ELEMENT_NOT_FOUND;
-    }
-
-    @Override
-    public void add(E element) {
-        add(size, element);
     }
 
     @Override
@@ -150,19 +121,18 @@ public class MyArrayList<E> implements IMyArrayList<E>{
     public int indexOf(E element) {
 
         if (element != null) {
-            for (int i = 0; i < size; i ++) {
+            for (int i = 0; i < size; i++) {
                 if (element.equals(elements[i])) {
                     return i;
                 }
             }
         } else {
-            for (int i = 0; i < size; i ++) {
+            for (int i = 0; i < size; i++) {
                 if (elements[i] == null) {
                     return i;
                 }
             }
         }
-
 
         return ELEMENT_NOT_FOUND;
     }
@@ -206,8 +176,8 @@ public class MyArrayList<E> implements IMyArrayList<E>{
      * 扩容容量<br>
      *
      * @param minCapacity 最小扩容值
-     * @throws OutOfMemoryError 最小扩容值为负数（超过整形最大值）时抛出
      * @return 扩容容量
+     * @throws OutOfMemoryError 最小扩容值为负数（超过整形最大值）时抛出
      */
     private int newCapacity(int minCapacity) {
 
@@ -228,7 +198,7 @@ public class MyArrayList<E> implements IMyArrayList<E>{
                 return newCapacity;
 
                 // 如果最小扩容值超过动态数组最大长度，返回整形最大值
-            } else if (minCapacity > MAX_ARRAY_LENGTH){
+            } else if (minCapacity > MAX_ARRAY_LENGTH) {
                 return Integer.MAX_VALUE;
 
                 // 否则返回动态数组最大长度
@@ -251,39 +221,6 @@ public class MyArrayList<E> implements IMyArrayList<E>{
             }
         }
 
-    }
-
-    /**
-     * 检查索引合法性
-     *
-     * @param index 索引
-     */
-    private void rangeCheck(int index) {
-        rangeCheckForAdd(index);
-        if (index == size) {
-            throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
-        }
-    }
-
-    /**
-     * 检查增加操作的索引合法性
-     *
-     * @param index 索引
-     */
-    private void rangeCheckForAdd(int index) {
-        if (index > size || index < 0) {
-            throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
-        }
-    }
-
-    /**
-     * 返回数组越界的具体信息
-     *
-     * @param index 越界索引
-     * @return 数组越界的具体信息
-     */
-    private String outOfBoundsMsg(int index) {
-        return "Index: "+index+", Size: "+size;
     }
 
     /**

@@ -3,29 +3,34 @@ package com.yue.season1.class02;
 /**
  * @author 19745
  */
-public interface IMyArrayList<E> {
+public interface IList<E> {
 
     /**
-     * 清空动态数组所有元素。此调用返回后，列表将为空。
+     * 列表中没找到指定值
+     */
+    static final int ELEMENT_NOT_FOUND = -1;
+
+    /**
+     * 清空列表所有元素。
      */
     void clear();
 
     /**
-     * 返回动态数组长度
+     * 返回列表长度
      *
-     * @return 动态数组长度
+     * @return 列表长度
      */
     int size();
 
     /**
-     * 返回动态数组是否为空
+     * 返回列表是否为空
      *
-     * @return 态数组是否为空
+     * @return 列表是否为空
      */
     boolean isEmpty();
 
     /**
-     * 查询动态数组中是否包含指定值（至少包含一个）
+     * 查询列表中是否包含指定值（至少包含一个）
      *
      * @param element 查询值
      * @return 查询结果
@@ -33,14 +38,14 @@ public interface IMyArrayList<E> {
     boolean contains(E element);
 
     /**
-     * 添加新元素至动态数组
+     * 添加新元素至列表
      *
      * @param element 添加元素
      */
     void add(E element);
 
     /**
-     * 查询动态数组中的指定索引对应的值
+     * 查询列表中的指定索引对应的值
      *
      * @param index 索引
      * @return 索引对应的值
@@ -57,8 +62,7 @@ public interface IMyArrayList<E> {
     E set(int index, E element);
 
     /**
-     * 在动态数组中的指定位置插入指定元素。<br>
-     * 将当前位于该位置的元素（如果有）和任何后续元素向右移动（将一个元素添加到其索引中）。
+     * 在列表中的指定位置插入指定元素。
      *
      * @param index 索引
      * @param element 插入元素
@@ -66,7 +70,7 @@ public interface IMyArrayList<E> {
     void add(int index, E element);
 
     /**
-     * 删除动态数组中的指定索引对应的值
+     * 删除列表中的指定索引对应的值
      *
      * @param index 索引
      * @return 删除结果
@@ -74,7 +78,7 @@ public interface IMyArrayList<E> {
     E remove(int index);
 
     /**
-     * 在动态数组中查找指定值的索引
+     * 在列表中查找首个指定值的索引
      *
      * @param element 指定值
      * @return 索引值
