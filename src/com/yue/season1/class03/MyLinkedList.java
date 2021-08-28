@@ -9,10 +9,10 @@ import java.util.NoSuchElementException;
  */
 public class MyLinkedList<E> extends MyAbstractList<E> {
 
-    private Node<E> firstNode;
-    private Node<E> lastNode;
+    protected Node<E> firstNode;
+    protected Node<E> lastNode;
 
-    private static class Node<E> {
+    protected static class Node<E> {
         E element;
         Node<E> nextNode;
         Node<E> prevNode;
@@ -21,6 +21,27 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
             this.element = element;
             this.nextNode = nextNode;
             this.prevNode = prevNode;
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+
+            if (prevNode != null) {
+                sb.append(prevNode.element);
+            } else {
+                sb.append("null");
+            }
+
+            sb.append("_").append(element).append("_");
+
+            if (nextNode != null) {
+                sb.append(nextNode.element);
+            } else {
+                sb.append("null");
+            }
+
+            return sb.toString();
         }
     }
 
@@ -108,7 +129,7 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
             if (node != firstNode) {
                 stringBuilder.append(", ");
             }
-            stringBuilder.append(node.element);
+            stringBuilder.append(node);
             node = node.nextNode;
         }
         stringBuilder.append("]");
@@ -148,7 +169,7 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
      * @param index 索引
      * @return 节点
      */
-    private Node<E> getNode(int index) {
+    protected Node<E> getNode(int index) {
         Node<E> node;
         if (index < size >> 1) {
             node = firstNode;
@@ -164,7 +185,7 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
         return node;
     }
 
-    private void addBefore(E element, Node<E> node) {
+    protected void addBefore(E element, Node<E> node) {
 
         final Node<E> prevNode = node.prevNode;
         final Node<E> newNode = new Node<>(prevNode, element, node);
@@ -177,7 +198,7 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
         size += 1;
     }
 
-    private E unlink(Node<E> node) {
+    protected E unlink(Node<E> node) {
         E element = node.element;
         Node<E> prevNode = node.prevNode;
         Node<E> nextNode = node.nextNode;
