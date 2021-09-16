@@ -2,6 +2,11 @@ package com.yue.season1.class05;
 
 import java.util.NoSuchElementException;
 
+/**
+ * 普通队列，先进先出。
+ * 
+ * @param <E> 队列元素类型
+ */
 public interface IQueue<E> {
 
     /**
