@@ -4,11 +4,11 @@ import java.util.Arrays;
 
 public abstract class AbstractCircle<E> {
 
-    public int frontIndex;
+    protected int frontIndex;
 
-    public int size = 0;
+    protected int size = 0;
 
-    public E[] elements;
+    protected E[] elements;
 
     /**
      * 默认的初始化容量
@@ -41,7 +41,7 @@ public abstract class AbstractCircle<E> {
      * 保证要有足够的容量
      * @param capacity 容量
      */
-    public void ensureCapacity(int capacity) {
+    protected void ensureCapacity(int capacity) {
         int oldCapacity = elements.length;
         if (oldCapacity >= capacity) return;
 
@@ -62,7 +62,7 @@ public abstract class AbstractCircle<E> {
      * @param index 逻辑索引
      * @return 真实索引
      */
-    public int index(int index) {
+    protected int index(int index) {
         index += frontIndex;
         if (index < 0) {
             return index + elements.length;
