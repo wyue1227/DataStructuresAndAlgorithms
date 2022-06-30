@@ -45,4 +45,12 @@ public class Node<E> {
     public void setParentNode(Node<E> parentNode) {
         this.parentNode = parentNode;
     }
+
+    public boolean isLeaf() {
+        return leftNode == null && rightNode == null;
+    }
+
+    public boolean hasTwoChildren() {
+        return leftNode != null && rightNode != null;
+    }
 }

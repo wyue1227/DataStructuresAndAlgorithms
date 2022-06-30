@@ -12,7 +12,11 @@ public class Main {
         for (Integer data: dataArray) {
             tree.add(data);
         }
-        BinaryTrees.print(tree);
+        BinaryTrees.println(tree);
+        System.out.println(tree.preorderTraversal());
+        System.out.println(tree.inorderTraversal());
+        System.out.println(tree.postorderTraversal());
+        System.out.println(tree.levelOrderTraversal());
     }
 
 }

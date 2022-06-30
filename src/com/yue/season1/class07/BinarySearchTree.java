@@ -3,6 +3,8 @@ package com.yue.season1.class07;
 import com.yue.season1.class07.print.BinaryTreeInfo;
 
 import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class BinarySearchTree<E> implements IBinarySearchTree<E>, BinaryTreeInfo {
 
@@ -74,6 +76,14 @@ public class BinarySearchTree<E> implements IBinarySearchTree<E>, BinaryTreeInfo
 
     }
 
+    private Node<E> findNode(E element) {
+        return null;
+    }
+
+    private void doRemove() {
+
+    }
+
     @Override
     public boolean contains(E element) {
         return false;
@@ -99,6 +109,86 @@ public class BinarySearchTree<E> implements IBinarySearchTree<E>, BinaryTreeInfo
             throw new IllegalArgumentException("参数不能为null");
         }
     }
+
+    /**
+     * 先序遍历
+     * @return 先序遍历结果
+     */
+    public String preorderTraversal() {
+        StringBuilder stringBuilder = new StringBuilder();
+        doPreorderTraversal(stringBuilder, root);
+        return stringBuilder.toString();
+    }
+
+    private void doPreorderTraversal(StringBuilder builder, Node<E> node) {
+        if (node == null) {
+            return;
+        }
+        builder.append(node.getElement()).append(" ");
+        doPreorderTraversal(builder, node.getLeftNode());
+        doPreorderTraversal(builder, node.getRightNode());
+    }
+
+    /**
+     * 中序遍历
+     * @return 中序遍历结果
+     */
+    public String inorderTraversal() {
+        StringBuilder stringBuilder = new StringBuilder();
+        doInorderTraversal(stringBuilder, root);
+        return stringBuilder.toString();
+    }
+
+    private void doInorderTraversal(StringBuilder builder, Node<E> node) {
+        if (node == null) {
+            return;
+        }
+        doInorderTraversal(builder, node.getLeftNode());
+        builder.append(node.getElement()).append(" ");
+        doInorderTraversal(builder, node.getRightNode());
+    }
+
+    /**
+     * 后序遍历
+     * @return 后序遍历结果
+     */
+    public String postorderTraversal() {
+        StringBuilder stringBuilder = new StringBuilder();
+        doPostorderTraversal(stringBuilder, root);
+        return stringBuilder.toString();
+    }
+
+    private void doPostorderTraversal(StringBuilder builder, Node<E> node) {
+        if (node == null) {
+            return;
+        }
+        doPostorderTraversal(builder, node.getLeftNode());
+        doPostorderTraversal(builder, node.getRightNode());
+        builder.append(node.getElement()).append(" ");
+    }
+
+    /**
+     * 层级遍历
+     * @return 层级遍历结果
+     */
+    public String levelOrderTraversal() {
+        StringBuilder stringBuilder = new StringBuilder();
+        Queue<Node<E>> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            Node<E> node = queue.poll();
+            stringBuilder.append(node.getElement()).append(" ");
+
+            if (node.getLeftNode() != null) {
+                queue.offer(node.getLeftNode());
+            }
+            if (node.getRightNode() != null) {
+                queue.offer(node.getRightNode());
+            }
+        }
+        return stringBuilder.toString();
+    }
+
 
     @Override
     public Object root() {
