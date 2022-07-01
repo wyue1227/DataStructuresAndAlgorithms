@@ -84,6 +84,60 @@ public class BinarySearchTree<E> implements IBinarySearchTree<E>, BinaryTreeInfo
 
     }
 
+    /**
+     * 获取指定节点的前驱节点 
+     * @param node 指定节点
+     * @return 指定节点的前驱节点
+     */
+    private Node<E> getPredesessor(Node<E> node) {
+        
+        if (node == null) { return null; }
+
+        if (node.getLeftNode() != null) {
+            
+             // 获取指定节点左子树的最右节点
+            Node<E> redesessorNode = node.getLeftNode();
+            while (redesessorNode.getRightNode() != null) {
+                redesessorNode = redesessorNode.getRightNode();
+            }
+            return redesessorNode;
+        }
+
+        // 从父节点中找前驱节点（位于父节点的右子树）
+        while (node.getParentNode() != null && node.getParentNode().getLeftNode() == node) {
+            node = node.getParentNode();
+        }
+
+        return node.getParentNode();
+    }
+
+    /**
+     * 获取指定节点的后继节点 
+     * @param node 指定节点
+     * @return 指定节点的后继节点
+     */
+    private Node<E> getSuccessor(Node<E> node) {
+        
+        if (node == null) { return null; }
+
+        if (node.getRightNode() != null) {
+            
+             // 获取指定节点右子树的最左节点
+            Node<E> redesessorNode = node.getRightNode();
+            while (redesessorNode.getLeftNode() != null) {
+                redesessorNode = redesessorNode.getLeftNode();
+            }
+            return redesessorNode;
+        }
+
+        // 从父节点中找后继节点（位于父节点的左子树）
+        while (node.getParentNode() != null && node.getParentNode().getRightNode() == node) {
+            node = node.getParentNode();
+        }
+
+        return node.getParentNode();
+    }
+
     @Override
     public boolean contains(E element) {
         return false;
