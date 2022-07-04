@@ -13,10 +13,12 @@ public class Main {
             tree.add(data);
         }
         BinaryTrees.println(tree);
-        System.out.println(tree.preorderTraversal());
-        System.out.println(tree.inorderTraversal());
-        System.out.println(tree.postorderTraversal());
-        System.out.println(tree.levelOrderTraversal());
+        tree.remove(9);
+        BinaryTrees.println(tree);
+//        System.out.println(tree.preorderTraversal());
+//        System.out.println(tree.inorderTraversal());
+//        System.out.println(tree.postorderTraversal());
+//        System.out.println(tree.levelOrderTraversal());
     }
 
 }
